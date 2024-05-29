@@ -1,27 +1,9 @@
 import SEO from "../SEO";
-import React, { useState, useEffect } from "react";
-import JoblyApi from "../../api/api";
 import Job from "./Job";
+import useAPI from "../../hooks/useAPI";
 
 function JobList() {
-  const [jobs, setJobs] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-
-  useEffect(() => {
-    const fetchCompany = async () => {
-      try {
-        const companyData = await JoblyApi.request("jobs");
-        setJobs(companyData.jobs);
-      } catch (err) {
-        setError(err);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchCompany();
-  }, []);
+  const [jobs, loading, error] = useAPI("jobs");
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error.join(", ")}</div>;
