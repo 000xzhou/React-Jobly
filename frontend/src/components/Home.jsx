@@ -6,7 +6,7 @@ function Home() {
     <div>
       <h1>Find a job at Jobly!</h1>
       <Link className="button" to={`/companies`}>
-        Look for companies
+        Search by companies
       </Link>
       <Link className="button" to={`/jobs`}>
         Find your next job
