@@ -4,9 +4,14 @@ function NavBar() {
   return (
     <>
       <div>
+        <Link to={`/`}>Jobly</Link>
+      </div>
+      {/* if user not login  */}
+      <div>
         <Link to={`/login`}>Login</Link>
         <Link to={`/register`}>Register</Link>
       </div>
+      {/* if user is login  */}
       <div>
         <div>username v</div>
         <div>
