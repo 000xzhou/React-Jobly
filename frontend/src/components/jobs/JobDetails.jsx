@@ -8,8 +8,7 @@ function JobDetails() {
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error.message}</div>;
-  // console.log(job);
-  console.log(job);
+
   return (
     <div>
       <div>
