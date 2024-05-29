@@ -1,35 +1,59 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+
+import NavBar from "./components/NavBar";
+import Home from "./components/Home";
+import NotFound from "./components/NotFound";
+// auth items
+import Login from "./components/auth/Login";
+import Register from "./components/auth/Register";
+// user items
+import User from "./components/users/User";
+import UserList from "./components/users/UserList";
+import UserForm from "./components/users/UserForm";
+// Job items
+import JobList from "./components/jobs/JobList";
+import JobForm from "./components/jobs/JobForm";
+import Job from "./components/jobs/Job";
+// company items
+import CompaniesList from "./components/companies/CompaniesList";
+import CompanyForm from "./components/companies/CompanyForm";
+import Company from "./components/companies/Company";
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <div className="App">
+      <BrowserRouter>
+        <NavBar />
+        <main>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+
+            <Route path="/companies">
+              <Route index element={<CompaniesList />} />
+              <Route path=":id" element={<Company />} />
+              <Route path="new" element={<CompanyForm />} />
+            </Route>
+
+            <Route path="/jobs">
+              <Route index element={<JobList />} />
+              <Route path=":id" element={<Job />} />
+              <Route path="new" element={<JobForm />} />
+            </Route>
+
+            <Route path="/users">
+              <Route index element={<UserList />} />
+              <Route path=":id" element={<User />} />
+              <Route path="new" element={<UserForm />} />
+            </Route>
+
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </main>
+      </BrowserRouter>
+    </div>
+  );
 }
 
-export default App
+export default App;
