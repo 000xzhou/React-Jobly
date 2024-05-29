@@ -3,7 +3,7 @@ import Company from "./Company";
 import useAPI from "../../hooks/useAPI";
 
 function CompaniesList() {
-  const [companies, loading, error] = useAPI("companies");
+  const [companies, loading, error] = useAPI("companies", "request");
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error.join(", ")}</div>;

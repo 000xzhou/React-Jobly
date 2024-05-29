@@ -3,7 +3,7 @@ import Job from "./Job";
 import useAPI from "../../hooks/useAPI";
 
 function JobList() {
-  const [jobs, loading, error] = useAPI("jobs");
+  const [jobs, loading, error] = useAPI("jobs", "request");
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error.join(", ")}</div>;

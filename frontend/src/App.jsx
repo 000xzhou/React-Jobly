@@ -11,10 +11,10 @@ import Register from "./components/auth/Register";
 import User from "./components/users/User";
 import UserList from "./components/users/UserList";
 import UserForm from "./components/users/UserForm";
-// Job items
+// job items
 import JobList from "./components/jobs/JobList";
 import JobForm from "./components/jobs/JobForm";
-import Job from "./components/jobs/Job";
+import JobDetails from "./components/jobs/JobDetails";
 // company items
 import CompaniesList from "./components/companies/CompaniesList";
 import CompanyForm from "./components/companies/CompanyForm";
@@ -39,7 +39,7 @@ function App() {
 
             <Route path="/jobs">
               <Route index element={<JobList />} />
-              <Route path=":id" element={<Job />} />
+              <Route path=":id" element={<JobDetails />} />
               <Route path="new" element={<JobForm />} />
             </Route>
 

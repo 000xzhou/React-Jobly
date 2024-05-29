@@ -1,30 +1,11 @@
 import { useParams } from "react-router-dom";
-import { useState, useEffect } from "react";
-import JoblyApi from "../../api/api";
 import { Link } from "react-router-dom";
+import useAPI from "../../hooks/useAPI";
 
 function CompanyDetails() {
   const { handle } = useParams();
 
-  const [company, setCompany] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-
-  useEffect(() => {
-    const fetchCompany = async () => {
-      try {
-        const companyData = await JoblyApi.getCompany(handle);
-        setCompany(companyData);
-      } catch (err) {
-        setError(err);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchCompany();
-  }, [handle]);
-
+  const [company, loading, error] = useAPI(handle, "getCompany");
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error.message}</div>;
 
