@@ -1,23 +1,23 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
-import NavBar from "./components/NavBar";
-import Home from "./components/Home";
-import NotFound from "./components/NotFound";
+import NavBar from "./pages/NavBar";
+import Home from "./pages/Home";
+import NotFound from "./pages/NotFound";
 // auth items
-import Login from "./components/auth/Login";
-import Register from "./components/auth/Register";
+import Login from "./pages/auth/Login";
+import Register from "./pages/auth/Register";
 // user items
-import User from "./components/users/User";
-import UserList from "./components/users/UserList";
-import UserForm from "./components/users/UserForm";
+import User from "./pages/users/User";
+import UserList from "./pages/users/UserList";
+import UserForm from "./pages/users/UserForm";
 // Job items
-import JobList from "./components/jobs/JobList";
-import JobForm from "./components/jobs/JobForm";
-import Job from "./components/jobs/Job";
+import JobList from "./pages/jobs/JobList";
+import JobForm from "./pages/jobs/JobForm";
+import Job from "./pages/jobs/Job";
 // company items
-import CompaniesList from "./components/companies/CompaniesList";
-import CompanyForm from "./components/companies/CompanyForm";
-import Company from "./components/companies/Company";
+import CompaniesList from "./pages/companies/CompaniesList";
+import CompanyForm from "./pages/companies/CompanyForm";
+import Company from "./pages/companies/Company";
 
 function App() {
   return (
