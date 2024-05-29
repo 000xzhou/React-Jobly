@@ -1,8 +1,9 @@
 function User() {
   return (
-    <>
-      <div>User</div>
-    </>
+    <div>
+      <div>Hello firstName lastName</div>
+      <div>Recently Applied Jobs</div>
+    </div>
   );
 }
 

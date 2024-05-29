@@ -1,7 +1,7 @@
 function JobList() {
   return (
     <>
-      <div>JobList</div>
+      <h1>Search for jobs</h1>
     </>
   );
 }
