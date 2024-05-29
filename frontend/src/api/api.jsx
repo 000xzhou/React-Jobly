@@ -41,7 +41,14 @@ class JoblyApi {
     return res.company;
   }
 
-  // obviously, you'll add a lot here ...
+  // Individual API routes
+
+  /** Get details on a company by handle. */
+
+  static async getJob(id) {
+    let res = await this.request(`jobs/${id}`);
+    return res.job;
+  }
 }
 
 // for now, put token ("testuser" / "password" on class)

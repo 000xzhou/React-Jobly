@@ -1,8 +1,13 @@
-function Job() {
+import { Link } from "react-router-dom";
+
+function Job({ id, title, companyName }) {
   return (
-    <>
-      <div>Job</div>
-    </>
+    <div id={id}>
+      <Link to={`/jobs/${id}`}>
+        <h2>{title}</h2>
+        <p>{companyName}</p>
+      </Link>
+    </div>
   );
 }
 
