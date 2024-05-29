@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import JoblyApi from "../api/api";
 
+// THIS IS A GET ONLY
 const useAPI = (type, request) => {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -8,15 +9,15 @@ const useAPI = (type, request) => {
 
   //   fetching company
   useEffect(() => {
-    const fetchCompany = async () => {
+    const fetchData = async () => {
       try {
-        const companyData = await JoblyApi[request](type);
+        const dataItems = await JoblyApi[request](type);
 
         // store item depending on type of request
         if (request === "request") {
-          setData(companyData[type]);
+          setData(dataItems[type]);
         } else {
-          setData(companyData);
+          setData(dataItems);
         }
       } catch (err) {
         setError(err);
@@ -25,7 +26,7 @@ const useAPI = (type, request) => {
       }
     };
 
-    fetchCompany();
+    fetchData();
   }, [type, request]);
 
   return [data, loading, error];
