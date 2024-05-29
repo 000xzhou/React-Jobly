@@ -1,23 +1,24 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import "./App.css";
 
-import NavBar from "./pages/NavBar";
-import Home from "./pages/Home";
-import NotFound from "./pages/NotFound";
+import NavBar from "./components/NavBar";
+import Home from "./components/Home";
+import NotFound from "./components/NotFound";
 // auth items
-import Login from "./pages/auth/Login";
-import Register from "./pages/auth/Register";
+import Login from "./components/auth/Login";
+import Register from "./components/auth/Register";
 // user items
-import User from "./pages/users/User";
-import UserList from "./pages/users/UserList";
-import UserForm from "./pages/users/UserForm";
+import User from "./components/users/User";
+import UserList from "./components/users/UserList";
+import UserForm from "./components/users/UserForm";
 // Job items
-import JobList from "./pages/jobs/JobList";
-import JobForm from "./pages/jobs/JobForm";
-import Job from "./pages/jobs/Job";
+import JobList from "./components/jobs/JobList";
+import JobForm from "./components/jobs/JobForm";
+import Job from "./components/jobs/Job";
 // company items
-import CompaniesList from "./pages/companies/CompaniesList";
-import CompanyForm from "./pages/companies/CompanyForm";
-import Company from "./pages/companies/Company";
+import CompaniesList from "./components/companies/CompaniesList";
+import CompanyForm from "./components/companies/CompanyForm";
+import CompanyDetails from "./components/companies/CompanyDetails";
 
 function App() {
   return (
@@ -32,7 +33,7 @@ function App() {
 
             <Route path="/companies">
               <Route index element={<CompaniesList />} />
-              <Route path=":id" element={<Company />} />
+              <Route path=":handle" element={<CompanyDetails />} />
               <Route path="new" element={<CompanyForm />} />
             </Route>
 
