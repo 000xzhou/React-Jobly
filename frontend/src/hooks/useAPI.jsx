@@ -24,6 +24,6 @@ const useAPI = (apiMethod, endpoint, other = {}) => {
     fetchData();
   }, [endpoint, apiMethod, filter]);
 
-  return [apiData, loading, error, setFilter];
+  return [apiData, loading, error, filter, setFilter];
 };
 export default useAPI;
