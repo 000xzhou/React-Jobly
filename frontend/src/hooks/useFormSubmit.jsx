@@ -3,6 +3,7 @@ import JoblyApi from "../api/api";
 import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import TokenContext from "../tokenContext";
+import { jwtDecode } from "jwt-decode";
 
 const useFormSubmit = (initialState, apiMethod) => {
   const navigate = useNavigate();
@@ -27,14 +28,12 @@ const useFormSubmit = (initialState, apiMethod) => {
       const response = await JoblyApi[apiMethod](formData);
       // save token
       JoblyApi.token = response.token;
-      updateUser({
-        username: formData.username,
-        token: response.token,
-      });
+      const decoded = jwtDecode(response.token);
+      updateUser(decoded);
+
+      navigate(`/users/${formData.username}`);
     } catch (err) {
       setError(err);
-    } finally {
-      navigate(`/users/${formData.username}`);
     }
   };
 

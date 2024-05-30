@@ -25,13 +25,11 @@ import TokenContext from "./tokenContext";
 
 function App() {
   //need to change this to useContext
-  const [currentUser, setCurrentUser] = useState({
-    username: "testuser",
-    token: "",
-  });
+  const [currentUser, setCurrentUser] = useState(null);
   const updateUser = (user) => {
     setCurrentUser(user);
   };
+
   return (
     <div className="App">
       <BrowserRouter>

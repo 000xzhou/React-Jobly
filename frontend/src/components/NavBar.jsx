@@ -4,11 +4,10 @@ import TokenContext from "../tokenContext";
 
 function NavBar() {
   const { currentUser } = useContext(TokenContext);
-
+  console.log(currentUser);
   return (
     <>
       <div>
-        <h1>{currentUser.username}</h1>
         <Link to={`/`}>Jobly</Link>
       </div>
       {/* if user not login  */}
@@ -16,29 +15,33 @@ function NavBar() {
         <Link to={`/login`}>Login</Link>
         <Link to={`/register`}>Register</Link>
       </div>
-      {/* if user is login  */}
-      <div>
-        <div>{currentUser.username} v</div>
+      {currentUser && (
         <div>
-          <div>{currentUser.username}</div>
-          <Link to={`/users/${currentUser.username}`}>Edit profile</Link>
-          <Link to={`/users/logout`}>Log out</Link>
+          <div>{currentUser.username} v</div>
+          <div>
+            <div>{currentUser.username}</div>
+            <Link to={`/users/${currentUser.username}`}>Edit profile</Link>
+            <Link to={`/users/logout`}>Log out</Link>
 
-          {/**if admin*/}
-          <Link className="button" to={`/users`}>
-            List of users
-          </Link>
-          <Link className="button" to={`/jobs/new`}>
-            Create A Job
-          </Link>
-          <Link className="button" to={`/companies/new`}>
-            Create A Company
-          </Link>
-          <Link className="button" to={`/users/new`}>
-            Create A User
-          </Link>
+            {currentUser.isAdmin ? (
+              <div>
+                <Link className="button" to={`/users`}>
+                  List of users
+                </Link>
+                <Link className="button" to={`/jobs/new`}>
+                  Create A Job
+                </Link>
+                <Link className="button" to={`/companies/new`}>
+                  Create A Company
+                </Link>
+                <Link className="button" to={`/users/new`}>
+                  Create A User
+                </Link>
+              </div>
+            ) : null}
+          </div>
         </div>
-      </div>
+      )}
     </>
   );
 }
