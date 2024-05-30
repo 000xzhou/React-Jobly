@@ -1,20 +1,56 @@
 import SEO from "../SEO";
 import Job from "./Job";
-import useAPI from "../../hooks/useAPI";
+import useSearch from "../../hooks/useSearch";
 
 function JobList() {
-  const [jobs, loading, error] = useAPI("request", "jobs");
+  // * Can provide search filter in query:
+  const initialState = {
+    minSalary: "",
+    hasEquity: false,
+    title: "",
+  };
+
+  const [formData, handleChange, jobs, loading, error] = useSearch(
+    initialState,
+    "request",
+    "jobs"
+  );
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error.join(", ")}</div>;
-  // * Can provide search filter in query:
-  // * - minSalary
-  // * - hasEquity (true returns only jobs with equity > 0, other values ignored)
-  // * - title (will find case-insensitive, partial matches)
+
   return (
     <>
       <SEO title="Jobs" description="A list of jobs" />
       <div>
+        <form style={{ paddingLeft: "40px" }}>
+          <label htmlFor="title">Search for a job: </label>
+          <input
+            type="text"
+            id="title"
+            name="title"
+            placeholder="Search here"
+            onChange={handleChange}
+            value={formData.title}
+          />
+          <label htmlFor="minSalary">Min Salary: </label>
+          <input
+            type="number"
+            id="minSalary"
+            name="minSalary"
+            onChange={handleChange}
+            value={formData.minSalary}
+          />
+          <label htmlFor="hasEquity">Equity: </label>
+          <input
+            type="checkbox"
+            id="hasEquity"
+            name="hasEquity"
+            onChange={handleChange}
+            checked={formData.hasEquity}
+          />
+        </form>
+
         <ul>
           {jobs.jobs.map((job) => (
             <Job

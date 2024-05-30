@@ -1,44 +1,19 @@
 import SEO from "../SEO";
 import Company from "./Company";
-import useAPI from "../../hooks/useAPI";
-import { useState } from "react";
+import useSearch from "../../hooks/useSearch";
 
 function CompaniesList() {
+  // * Can provide search filter in query:
   const initialState = {
     minEmployees: "",
     maxEmployees: "",
     name: "",
   };
-  const [formData, setFormData] = useState(initialState);
-
-  const [companies, loading, error, filter, setFilter] = useAPI(
+  const [formData, handleChange, companies, loading, error] = useSearch(
+    initialState,
     "request",
     "companies"
   );
-
-  const handleChange = (e) => {
-    e.preventDefault();
-
-    // * - minEmployees
-    // * - maxEmployees
-    // * - nameLike (will find case-insensitive, partial matches)
-    // Update filter
-    let updatedFilter = {
-      ...filter,
-      [e.target.name]: e.target.value,
-    };
-
-    // update form
-    setFormData(updatedFilter);
-
-    // Remove keys with empty values from the filter if val is empty before sending to api
-    if (e.target.value === "") {
-      delete updatedFilter[e.target.name];
-    }
-
-    // get api
-    setFilter(updatedFilter);
-  };
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error.error.message}</div>;
@@ -64,7 +39,7 @@ function CompaniesList() {
             name="minEmployees"
             onChange={handleChange}
             value={formData.minEmployees}
-          />{" "}
+          />
           <label htmlFor="maxEmployees">Max Employees: </label>
           <input
             type="number"
