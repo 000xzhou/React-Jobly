@@ -1,3 +1,28 @@
 .box {
   border: 1px solid rgba(255, 255, 255, 0.87);
 }
+
+nav {
+  display: flex;
+  justify-content: space-between;
+}
+
+nav * {
+  padding-inline: 1rem;
+}
+
+.dropdownMenu {
+  position: relative;
+}
+.dropdownItem {
+  position: absolute;
+  flex-direction: column;
+  background-color: green;
+  min-width: 160px;
+  overflow: auto;
+  z-index: 1;
+  padding: 0;
+}
+.navBtn {
+  background-color: rebeccapurple;
+}
