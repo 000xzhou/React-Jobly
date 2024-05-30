@@ -1,15 +1,25 @@
 import { Link } from "react-router-dom";
 import { useContext, useState } from "react";
 import TokenContext from "../tokenContext";
+import JoblyApi from "../api/api";
+import { useNavigate } from "react-router-dom";
 
 function NavBar() {
-  const { currentUser } = useContext(TokenContext);
+  const { currentUser, updateUser } = useContext(TokenContext);
   const [dropdown, setDropdown] = useState(false);
+  const navigate = useNavigate();
 
   const toggleDropdown = () => {
     setDropdown((prevState) => !prevState);
   };
-  console.log(dropdown);
+
+  const handleLogout = () => {
+    // remove user from currentUser and jobly api and localstroage when I add that
+    updateUser(null);
+    JoblyApi.token = "";
+    // redirect to home page
+    navigate(`/`);
+  };
 
   return (
     <nav>
@@ -30,22 +40,39 @@ function NavBar() {
             className="dropdownItem"
             style={{ display: dropdown ? "flex" : "none" }}
           >
-            <Link to={`/users/${currentUser.username}`}>Edit profile</Link>
-            <Link to={`/users/logout`}>Log out</Link>
+            <Link
+              onClick={toggleDropdown}
+              to={`/users/${currentUser.username}`}
+            >
+              Edit profile
+            </Link>
+            <button onClick={handleLogout}>Log out</button>
 
             {currentUser.isAdmin ? (
               <>
-                <Link className="navBtn" to={`/users`}>
+                <Link onClick={toggleDropdown} className="navBtn" to={`/users`}>
                   List of users
                 </Link>
-                <Link className="navBtn" to={`/jobs/new`}>
-                  Create A Job
+                <Link
+                  onClick={toggleDropdown}
+                  className="navBtn"
+                  to={`/jobs/new`}
+                >
+                  Create a Job
                 </Link>
-                <Link className="navBtn" to={`/companies/new`}>
-                  Create A Company
+                <Link
+                  onClick={toggleDropdown}
+                  className="navBtn"
+                  to={`/companies/new`}
+                >
+                  Create a Company
                 </Link>
-                <Link className="navBtn" to={`/users/new`}>
-                  Create A User
+                <Link
+                  onClick={toggleDropdown}
+                  className="navBtn"
+                  to={`/users/new`}
+                >
+                  Create a User
                 </Link>
               </>
             ) : null}

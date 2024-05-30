@@ -89,7 +89,7 @@ class JoblyApi {
 //   "FtrMwBQwe6Ue-glIFgz_Nf8XxRT2YecFCiSpYL0fCXc";
 
 // testadmin
-JoblyApi.token =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3RhZG1pbiIsImlzQWRtaW4iOnRydWUsImlhdCI6MTcxNzA4NzE1MX0.ZSiO94pt5dnh9XQHK4iTSIH4YnxW2DlXoHIKnRmjK7g";
+// JoblyApi.token =
+//   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3RhZG1pbiIsImlzQWRtaW4iOnRydWUsImlhdCI6MTcxNzA4NzE1MX0.ZSiO94pt5dnh9XQHK4iTSIH4YnxW2DlXoHIKnRmjK7g";
 
 export default JoblyApi;
