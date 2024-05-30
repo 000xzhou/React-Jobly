@@ -1,4 +1,5 @@
 import useFormSubmit from "../../hooks/useFormSubmit";
+import SEO from "../SEO";
 
 function Register() {
   const initialState = {
@@ -17,6 +18,8 @@ function Register() {
   // returns
   return (
     <>
+      <SEO title="Register" description="Become a new user to jobly" />
+
       <div>{error ? " Error:" + error : null}</div>
       <form onSubmit={handleSubmit}>
         <label htmlFor="username">Username: </label>

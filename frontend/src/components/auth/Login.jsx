@@ -1,4 +1,5 @@
 import useFormSubmit from "../../hooks/useFormSubmit";
+import SEO from "../SEO";
 
 function Login() {
   const initialState = {
@@ -14,6 +15,8 @@ function Login() {
   // Returns
   return (
     <>
+      <SEO title="Login" description="Login to jobly" />
+
       <div>{error ? " Error:" + error : null}</div>
       <form onSubmit={handleSubmit}>
         <label htmlFor="username">Username: </label>

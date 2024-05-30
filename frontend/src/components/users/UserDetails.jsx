@@ -1,5 +1,6 @@
 import { useParams } from "react-router-dom";
 import useAPI from "../../hooks/useAPI";
+import SEO from "../SEO";
 
 function UserDetails() {
   const { username } = useParams();
@@ -11,6 +12,11 @@ function UserDetails() {
   // Check if user and user.user are defined
   return (
     <>
+      <SEO
+        title={`Users - ${user.username}`}
+        description={`Details of ${user.username}`}
+      />
+
       <div>
         Hello {user.firstName} {user.lastName}
       </div>

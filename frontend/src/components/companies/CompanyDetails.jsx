@@ -1,6 +1,7 @@
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import useAPI from "../../hooks/useAPI";
+import SEO from "../SEO";
 
 function CompanyDetails() {
   const { handle } = useParams();
@@ -11,6 +12,11 @@ function CompanyDetails() {
 
   return (
     <div>
+      <SEO
+        title={`Companies - ${company.name}`}
+        description={`Detail of ${company.name}`}
+      />
+
       <div>
         <h2>{company.name}</h2>
         <p>{company.description}</p>
