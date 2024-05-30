@@ -7,7 +7,10 @@ function JobList() {
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error.join(", ")}</div>;
-
+  // * Can provide search filter in query:
+  // * - minSalary
+  // * - hasEquity (true returns only jobs with equity > 0, other values ignored)
+  // * - title (will find case-insensitive, partial matches)
   return (
     <>
       <SEO title="Jobs" description="A list of jobs" />

@@ -2,8 +2,9 @@ import { useState, useEffect } from "react";
 import JoblyApi from "../api/api";
 
 // const useAPI = (endpoint, apiMethod) => {
-const useAPI = (apiMethod, endpoint) => {
+const useAPI = (apiMethod, endpoint, other = {}) => {
   const [apiData, setApiData] = useState(null);
+  const [filter, setFilter] = useState(other);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -11,7 +12,7 @@ const useAPI = (apiMethod, endpoint) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const dataItems = await JoblyApi[apiMethod](endpoint);
+        const dataItems = await JoblyApi[apiMethod](endpoint, filter);
         setApiData(dataItems);
       } catch (err) {
         setError(err);
@@ -21,8 +22,8 @@ const useAPI = (apiMethod, endpoint) => {
     };
 
     fetchData();
-  }, [endpoint, apiMethod]);
+  }, [endpoint, apiMethod, filter]);
 
-  return [apiData, loading, error];
+  return [apiData, loading, error, setFilter];
 };
 export default useAPI;
