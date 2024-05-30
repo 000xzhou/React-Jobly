@@ -24,7 +24,7 @@ function NavBar() {
       ) : (
         <div>
           <div onClick={toggleDropdown} className="dropdownMenu">
-            {currentUser.username} v
+            {currentUser.username} {dropdown ? "^" : "v"}
           </div>
           <div
             className="dropdownItem"
