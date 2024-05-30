@@ -25,6 +25,9 @@ function NavBar() {
           <Link to={`/users/logout`}>Log out</Link>
 
           {/**if admin*/}
+          <Link className="button" to={`/users`}>
+            List of users
+          </Link>
           <Link className="button" to={`/jobs/new`}>
             Create A Job
           </Link>
