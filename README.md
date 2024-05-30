@@ -22,3 +22,7 @@ DELETE user/:username/edit
 POST users//:username/jobs
 
 ## all other routes are free for all
+
+current users you can use
+testuser password
+testadmin password
