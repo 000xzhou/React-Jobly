@@ -1,9 +1,14 @@
 import { Link } from "react-router-dom";
+import { useContext } from "react";
+import TokenContext from "../tokenContext";
 
 function NavBar() {
+  const { currentUser } = useContext(TokenContext);
+
   return (
     <>
       <div>
+        <h1>{currentUser.username}</h1>
         <Link to={`/`}>Jobly</Link>
       </div>
       {/* if user not login  */}
@@ -13,10 +18,10 @@ function NavBar() {
       </div>
       {/* if user is login  */}
       <div>
-        <div>username v</div>
+        <div>{currentUser.username} v</div>
         <div>
-          <div>username</div>
-          <Link to={`/users/username`}>Edit profile</Link>
+          <div>{currentUser.username}</div>
+          <Link to={`/users/${currentUser.username}`}>Edit profile</Link>
           <Link to={`/users/logout`}>Log out</Link>
 
           {/**if admin*/}

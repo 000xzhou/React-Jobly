@@ -4,7 +4,7 @@ import useAPI from "../../hooks/useAPI";
 
 function JobDetails() {
   const { id } = useParams();
-  const [job, loading, error] = useAPI(id, "getJob");
+  const [job, loading, error] = useAPI("getJob", id);
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error.message}</div>;

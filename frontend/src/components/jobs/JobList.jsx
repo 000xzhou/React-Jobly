@@ -3,7 +3,7 @@ import Job from "./Job";
 import useAPI from "../../hooks/useAPI";
 
 function JobList() {
-  const [jobs, loading, error] = useAPI("jobs", "request");
+  const [jobs, loading, error] = useAPI("request", "jobs");
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error.join(", ")}</div>;
@@ -13,7 +13,7 @@ function JobList() {
       <SEO title="Jobs" description="A list of jobs" />
       <div>
         <ul>
-          {jobs.map((job) => (
+          {jobs.jobs.map((job) => (
             <Job
               key={job.id}
               id={job.id}

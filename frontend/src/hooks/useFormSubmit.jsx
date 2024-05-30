@@ -1,10 +1,14 @@
 import { useState } from "react";
 import JoblyApi from "../api/api";
-import { redirect } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import TokenContext from "../tokenContext";
 
 const useFormSubmit = (initialState, apiMethod) => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState(initialState);
   const [error, setError] = useState(null);
+  const { updateUser } = useContext(TokenContext);
 
   // change input as user type
   const handleChange = (e) => {
@@ -23,12 +27,14 @@ const useFormSubmit = (initialState, apiMethod) => {
       const response = await JoblyApi[apiMethod](formData);
       // save token
       JoblyApi.token = response.token;
-      // setFormData(initialState);
-
-      // Redirect after submit
-      redirect(`/user/${formData.username}`);
+      updateUser({
+        username: formData.username,
+        token: response.token,
+      });
     } catch (err) {
       setError(err);
+    } finally {
+      navigate(`/users/${formData.username}`);
     }
   };
 

@@ -5,7 +5,7 @@ import useAPI from "../../hooks/useAPI";
 function CompanyDetails() {
   const { handle } = useParams();
 
-  const [company, loading, error] = useAPI(handle, "getCompany");
+  const [company, loading, error] = useAPI("getCompany", handle);
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error.message}</div>;
 
