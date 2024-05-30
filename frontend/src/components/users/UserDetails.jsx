@@ -1,29 +1,24 @@
 import { useParams } from "react-router-dom";
 import useAPI from "../../hooks/useAPI";
 import SEO from "../SEO";
+import UserEditForm from "./UserEditForm";
 
 function UserDetails() {
   const { username } = useParams();
-  const [user, loading, error] = useAPI("getUser", username);
+  const [user, loading, apiError] = useAPI("getUser", username);
 
   if (loading) return <div>Loading...</div>;
-  if (error) return <div>Error: {error.message}</div>;
-
-  // Check if user and user.user are defined
   return (
     <>
       <SEO
         title={`Users - ${user.username}`}
         description={`Details of ${user.username}`}
       />
-
-      <div>
-        Hello {user.firstName} {user.lastName}
-      </div>
-      <div>Recently Applied Jobs</div>
-      {user.applications.map((job) => (
-        <div key={job.id}>{job.title}</div>
-      ))}
+      <UserEditForm user={user} />
+      <h3>Recently Applied Jobs</h3>
+      {user.applications.length == 0
+        ? "You haven't apply to any!"
+        : user.applications.map((job) => <div key={job.id}>{job.title}</div>)}
     </>
   );
 }

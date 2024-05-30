@@ -18,7 +18,7 @@ GET users
 
 POST users/new
 PATCH users/:username/edit
-DELETE user/:username/edit
+DELETE users/:username/edit
 POST users//:username/jobs
 
 ## all other routes are free for all

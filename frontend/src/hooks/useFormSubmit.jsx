@@ -5,11 +5,12 @@ import { useContext } from "react";
 import TokenContext from "../tokenContext";
 import { jwtDecode } from "jwt-decode";
 
-const useFormSubmit = (initialState, apiMethod) => {
+const useFormSubmit = (initialState, apiMethod, isEdit) => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState(initialState);
   const [error, setError] = useState(null);
   const { updateUser } = useContext(TokenContext);
+  const [apiData, setApiData] = useState(null);
 
   // change input as user type
   const handleChange = (e) => {
@@ -27,9 +28,13 @@ const useFormSubmit = (initialState, apiMethod) => {
       // get token from api
       const response = await JoblyApi[apiMethod](formData);
       // save token
-      JoblyApi.token = response.token;
-      const decoded = jwtDecode(response.token);
-      updateUser(decoded);
+      if (isEdit) {
+        setApiData(response);
+      } else {
+        JoblyApi.token = response.token;
+        const decoded = jwtDecode(response.token);
+        updateUser(decoded);
+      }
 
       navigate(`/users/${formData.username}`);
     } catch (err) {

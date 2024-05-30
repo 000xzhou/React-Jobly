@@ -9,8 +9,8 @@ nav {
   margin: auto;
 }
 
-nav * {
-  padding-inline: 1rem;
+nav div a:nth-child(1) {
+  padding-right: 1rem;
 }
 
 .dropdownMenu {
@@ -25,6 +25,10 @@ nav * {
   z-index: 1;
   padding: 0;
 }
+.dropdownItem * {
+  padding: 1rem;
+}
+
 .navBtn {
   background-color: rebeccapurple;
 }
