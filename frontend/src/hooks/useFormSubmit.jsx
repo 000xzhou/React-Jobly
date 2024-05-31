@@ -2,14 +2,13 @@ import { useState } from "react";
 import JoblyApi from "../api/api";
 import { useNavigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
-import useLocalStorage from "./useLocalStorage";
 import { useUser } from "../UserProvider";
 
 const useFormSubmit = (initialState, apiMethod, isEdit) => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState(initialState);
   const [error, setError] = useState(null);
-  const [token, updateToken] = useLocalStorage("token", null);
+  // const [token, updateToken] = useLocalStorage("token", null);
   const { currentUser, setCurrentUser, setToken } = useUser();
 
   // change input as user type
@@ -32,7 +31,6 @@ const useFormSubmit = (initialState, apiMethod, isEdit) => {
         console.log("Edited!");
       } else {
         // Storage token in local storage and context
-        updateToken(response.token);
         setToken(response.token);
 
         // store current user in use context and storage
