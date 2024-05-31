@@ -2,19 +2,18 @@ import { useParams, useNavigate } from "react-router-dom";
 import useAPI from "../../hooks/useAPI";
 import SEO from "../SEO";
 import UserEditForm from "./UserEditForm";
-import TokenContext from "../../tokenContext";
-import { useContext, useEffect } from "react";
+import { useEffect } from "react";
+import { useUser } from "../../UserProvider";
 
 function UserDetails() {
   const { username } = useParams();
-
+  const { currentUser, setCurrentUser } = useUser();
   // checks if you are the correct user and login
-  const { currentUser } = useContext(TokenContext);
   const navigate = useNavigate();
   useEffect(() => {
     if (currentUser) {
       if (username !== currentUser.username) {
-        navigate(`/users/${currentUser.username}`);
+        navigate(`/`);
       }
     } else {
       navigate("/login");

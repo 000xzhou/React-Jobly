@@ -3,9 +3,10 @@ import { useContext, useState } from "react";
 import TokenContext from "../tokenContext";
 import JoblyApi from "../api/api";
 import { useNavigate } from "react-router-dom";
+import { useUser } from "../UserProvider";
 
 function NavBar() {
-  const { currentUser, updateUser } = useContext(TokenContext);
+  const { currentUser, setCurrentUser, setToken } = useUser();
   const [dropdown, setDropdown] = useState(false);
   const navigate = useNavigate();
 
@@ -14,8 +15,9 @@ function NavBar() {
   };
 
   const handleLogout = () => {
-    // remove user from currentUser and jobly api and localstroage when I add that
-    updateUser(null);
+    // remove ucurrentUser and jobly api from localstroage
+    setCurrentUser(null);
+    setToken(null);
     JoblyApi.token = "";
     // redirect to home page
     navigate(`/`);

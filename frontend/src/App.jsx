@@ -20,16 +20,18 @@ import CompaniesList from "./components/companies/CompaniesList";
 import CompanyForm from "./components/companies/CompanyForm";
 import CompanyDetails from "./components/companies/CompanyDetails";
 
-import TokenContext from "./tokenContext";
-import useCurrentUser from "./hooks/useCurrentUser";
+import useLocalStorage from "./hooks/useLocalStorage";
+import { UserProvider } from "./UserProvider";
 
 function App() {
-  const [currentUser, updateUser] = useCurrentUser();
+  // const [currentUser, updateUser] = useLocalStorage("currentUser", null);
+
+  // console.log(currentUser);
 
   return (
     <div className="App">
       <BrowserRouter>
-        <TokenContext.Provider value={{ currentUser, updateUser }}>
+        <UserProvider>
           <NavBar />
           <main>
             <Routes>
@@ -58,7 +60,7 @@ function App() {
               <Route path="*" element={<NotFound />} />
             </Routes>
           </main>
-        </TokenContext.Provider>
+        </UserProvider>
       </BrowserRouter>
     </div>
   );

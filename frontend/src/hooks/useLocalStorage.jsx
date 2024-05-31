@@ -1,13 +1,13 @@
 import { useState, useEffect } from "react";
 import JoblyApi from "../api/api";
 
-const useCurrentUser = (key) => {
+const useLocalStorage = (key, initialValue) => {
   const [dataState, setDataState] = useState(() => {
     const storedUser = localStorage.getItem(key);
     return storedUser ? JSON.parse(storedUser) : null;
   });
 
-  const updateUser = (data) => {
+  const updateState = (data) => {
     setDataState(data);
     if (data) {
       localStorage.setItem(key, JSON.stringify(data));
@@ -19,7 +19,7 @@ const useCurrentUser = (key) => {
     }
   };
 
-  return [dataState, updateUser];
+  return [dataState, updateState];
 };
 
-export default useCurrentUser;
+export default useLocalStorage;

@@ -1,11 +1,10 @@
 import { Link } from "react-router-dom";
 import SEO from "./SEO";
-import { useContext } from "react";
-import TokenContext from "../tokenContext";
+import { useUser } from "../UserProvider";
 
 function Home() {
   /* if login should redirect to users page */
-  const { currentUser } = useContext(TokenContext);
+  const { currentUser } = useUser();
 
   return (
     <>
