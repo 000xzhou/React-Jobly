@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import useAPI from "../../hooks/useAPI";
 import SEO from "../SEO";
@@ -6,6 +6,12 @@ import SEO from "../SEO";
 function JobDetails() {
   const { id } = useParams();
   const [job, loading, error] = useAPI("getJob", id);
+
+  const navigate = useNavigate();
+
+  const goBack = () => {
+    navigate(-1); // This will go back to the previous page
+  };
 
   const handleApplyClick = () => {
     console.log("here");
@@ -24,6 +30,9 @@ function JobDetails() {
       <div>
         <button className="button" onClick={handleApplyClick}>
           Apply
+        </button>
+        <button className="button" onClick={goBack}>
+          Go Back
         </button>
         <h2>{job.title}</h2>
         <p>Salary: {job.salary}</p>
