@@ -20,15 +20,11 @@ import CompaniesList from "./components/companies/CompaniesList";
 import CompanyForm from "./components/companies/CompanyForm";
 import CompanyDetails from "./components/companies/CompanyDetails";
 
-import { useState } from "react";
 import TokenContext from "./tokenContext";
+import useCurrentUser from "./hooks/useCurrentUser";
 
 function App() {
-  //need to change this to useContext
-  const [currentUser, setCurrentUser] = useState(null);
-  const updateUser = (user) => {
-    setCurrentUser(user);
-  };
+  const [currentUser, updateUser] = useCurrentUser();
 
   return (
     <div className="App">
