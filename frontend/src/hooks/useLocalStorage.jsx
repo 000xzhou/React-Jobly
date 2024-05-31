@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import JoblyApi from "../api/api";
 
 const useLocalStorage = (key, initialValue) => {
   const [dataState, setDataState] = useState(() => {
@@ -11,9 +10,6 @@ const useLocalStorage = (key, initialValue) => {
     setDataState(data);
     if (data) {
       localStorage.setItem(key, JSON.stringify(data));
-      if (key === "token") {
-        JoblyApi.token = data;
-      }
     } else {
       localStorage.removeItem(key);
     }

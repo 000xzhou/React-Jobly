@@ -10,7 +10,7 @@ const useFormSubmit = (initialState, apiMethod, isEdit) => {
   const [formData, setFormData] = useState(initialState);
   const [error, setError] = useState(null);
   const [token, updateToken] = useLocalStorage("token", null);
-  const { currentUser, setCurrentUser } = useUser();
+  const { currentUser, setCurrentUser, setToken } = useUser();
 
   // change input as user type
   const handleChange = (e) => {
@@ -31,10 +31,12 @@ const useFormSubmit = (initialState, apiMethod, isEdit) => {
       if (isEdit) {
         console.log("Edited!");
       } else {
-        // Storage token and user in local storage
+        // Storage token in local storage and context
         updateToken(response.token);
+        setToken(response.token);
+
+        // store current user in use context and storage
         const decoded = jwtDecode(response.token);
-        // store current user in use context
         setCurrentUser(decoded);
         // redirect to their user profile
         navigate(`/users/${formData.username}`);
