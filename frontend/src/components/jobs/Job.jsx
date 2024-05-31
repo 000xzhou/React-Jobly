@@ -1,33 +1,10 @@
 import { Link } from "react-router-dom";
-import JoblyApi from "../../api/api";
 import { useUser } from "../../UserProvider";
-import { useEffect, useState } from "react";
+import useApplyForJob from "../../hooks/useApplyForJob";
 
 function Job({ id, title, companyName }) {
   const { user } = useUser();
-  const [apply, setApply] = useState(false);
-
-  useEffect(() => {
-    const applyingForJob = async () => {
-      try {
-        await JoblyApi.postApplyJobs({
-          username: user.username,
-          jobId: id,
-        });
-        console.log("Application successful");
-      } catch (error) {
-        console.error("Error applying for job:", error);
-      }
-    };
-    // apply only if apply state is true. Should only happen once then button disable
-    if (apply) {
-      applyingForJob();
-    }
-  }, [apply, id, user]);
-
-  const handleApply = () => {
-    setApply(true);
-  };
+  const [apply, handleApply] = useApplyForJob(user.username, id);
 
   return (
     <div id={id}>

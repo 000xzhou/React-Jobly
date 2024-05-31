@@ -3,42 +3,19 @@ import { Link } from "react-router-dom";
 import useAPI from "../../hooks/useAPI";
 import SEO from "../SEO";
 import { useUser } from "../../UserProvider";
-import { useEffect, useState } from "react";
-import JoblyApi from "../../api/api";
+import useApplyForJob from "../../hooks/useApplyForJob";
 
 function JobDetails() {
   const { id } = useParams();
   const [job, loading, error] = useAPI("getJob", id);
-  const [apply, setApply] = useState(false);
   const { user } = useUser();
 
   const navigate = useNavigate();
-
   const goBack = () => {
     navigate(-1); // This will go back to the previous page
   };
 
-  useEffect(() => {
-    const applyingForJob = async () => {
-      try {
-        await JoblyApi.postApplyJobs({
-          username: user.username,
-          jobId: id,
-        });
-        console.log("Application successful");
-      } catch (error) {
-        console.error("Error applying for job:", error);
-      }
-    };
-    // apply only if apply state is true. Should only happen once then button disable
-    if (apply) {
-      applyingForJob();
-    }
-  }, [apply, id, user]);
-
-  const handleApply = () => {
-    setApply(true);
-  };
+  const [apply, handleApply] = useApplyForJob(user.username, id);
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error.message}</div>;

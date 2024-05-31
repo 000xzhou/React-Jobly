@@ -14,7 +14,10 @@ export const UserProvider = ({ children }) => {
   JoblyApi.token = token;
 
   // get jobs from user - user.jobs
-  const [user, loading] = useAPI("getUser", currentUser.username);
+  const [user, loading, error, filter, setFilter, setRefetch] = useAPI(
+    "getUser",
+    currentUser.username
+  );
   // waiting for it to load before returning data
   if (loading) {
     return <div>Loading user data...</div>;
@@ -22,7 +25,7 @@ export const UserProvider = ({ children }) => {
 
   return (
     <UserContext.Provider
-      value={{ currentUser, setCurrentUser, setToken, user }}
+      value={{ currentUser, setCurrentUser, setToken, user, setRefetch }}
     >
       {children}
     </UserContext.Provider>
