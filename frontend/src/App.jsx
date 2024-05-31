@@ -20,14 +20,9 @@ import CompaniesList from "./components/companies/CompaniesList";
 import CompanyForm from "./components/companies/CompanyForm";
 import CompanyDetails from "./components/companies/CompanyDetails";
 
-import useLocalStorage from "./hooks/useLocalStorage";
 import { UserProvider } from "./UserProvider";
 
 function App() {
-  // const [currentUser, updateUser] = useLocalStorage("currentUser", null);
-
-  // console.log(currentUser);
-
   return (
     <div className="App">
       <BrowserRouter>
