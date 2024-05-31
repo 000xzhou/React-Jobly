@@ -1,11 +1,32 @@
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import useAPI from "../../hooks/useAPI";
 import SEO from "../SEO";
 import UserEditForm from "./UserEditForm";
+import TokenContext from "../../tokenContext";
+import { useContext, useEffect } from "react";
 
 function UserDetails() {
   const { username } = useParams();
-  const [user, loading, apiError] = useAPI("getUser", username);
+
+  // checks if you are the correct user and login
+  const { currentUser } = useContext(TokenContext);
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (currentUser) {
+      if (username !== currentUser.username) {
+        navigate(`/users/${currentUser.username}`);
+      }
+    } else {
+      navigate("/login");
+    }
+  }, [username, currentUser, navigate]);
+  // Only fetch user data if currentUser matches the username from params
+  if (!currentUser || username !== currentUser.username) {
+    return null;
+  }
+
+  // get user api
+  const [user, loading] = useAPI("getUser", username);
 
   if (loading) return <div>Loading...</div>;
   return (
