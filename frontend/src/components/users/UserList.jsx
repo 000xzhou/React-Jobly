@@ -1,8 +1,25 @@
 import useAPI from "../../hooks/useAPI";
 import User from "./User";
 import SEO from "../SEO";
+import { useUser } from "../../UserProvider";
+import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 function UserList() {
+  const navigate = useNavigate();
+  const { currentUser } = useUser();
+
+  // redirect if not admin
+  useEffect(() => {
+    if (!currentUser.isAdmin) {
+      navigate(`/`);
+    }
+  }, [currentUser, navigate]);
+  if (!currentUser.isAdmin) {
+    return null;
+  }
+
+  // if admin below
   const [users, loading, error] = useAPI("request", "users");
 
   if (loading) return <div>Loading...</div>;
