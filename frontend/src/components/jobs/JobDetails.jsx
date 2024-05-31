@@ -2,10 +2,15 @@ import { useParams, useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import useAPI from "../../hooks/useAPI";
 import SEO from "../SEO";
+import { useUser } from "../../UserProvider";
+import { useEffect, useState } from "react";
+import JoblyApi from "../../api/api";
 
 function JobDetails() {
   const { id } = useParams();
   const [job, loading, error] = useAPI("getJob", id);
+  const [apply, setApply] = useState(false);
+  const { user } = useUser();
 
   const navigate = useNavigate();
 
@@ -13,8 +18,26 @@ function JobDetails() {
     navigate(-1); // This will go back to the previous page
   };
 
-  const handleApplyClick = () => {
-    console.log("here");
+  useEffect(() => {
+    const applyingForJob = async () => {
+      try {
+        await JoblyApi.postApplyJobs({
+          username: user.username,
+          jobId: id,
+        });
+        console.log("Application successful");
+      } catch (error) {
+        console.error("Error applying for job:", error);
+      }
+    };
+    // apply only if apply state is true. Should only happen once then button disable
+    if (apply) {
+      applyingForJob();
+    }
+  }, [apply, id, user]);
+
+  const handleApply = () => {
+    setApply(true);
   };
 
   if (loading) return <div>Loading...</div>;
@@ -28,9 +51,16 @@ function JobDetails() {
       />
 
       <div>
-        <button className="button" onClick={handleApplyClick}>
-          Apply
-        </button>
+        {user.applications.find((jobId) => jobId == id) ? (
+          <button className="button" disabled>
+            Applied
+          </button>
+        ) : (
+          <button className="button" disabled={apply} onClick={handleApply}>
+            {apply ? "Applied" : "Apply"}
+          </button>
+        )}
+
         <button className="button" onClick={goBack}>
           Go Back
         </button>

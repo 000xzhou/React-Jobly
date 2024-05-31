@@ -4,10 +4,11 @@ import SEO from "../SEO";
 import UserEditForm from "./UserEditForm";
 import { useEffect } from "react";
 import { useUser } from "../../UserProvider";
+import UserJobs from "./UserJobs";
 
 function UserDetails() {
   const { username } = useParams();
-  const { currentUser, setCurrentUser } = useUser();
+  const { currentUser } = useUser();
   // checks if you are the correct user and login
   const navigate = useNavigate();
   useEffect(() => {
@@ -25,9 +26,10 @@ function UserDetails() {
   }
 
   // get user api
-  const [user, loading] = useAPI("getUser", username);
 
-  if (loading) return <div>Loading...</div>;
+  const [user, userLoading] = useAPI("getUser", currentUser.username);
+
+  if (userLoading) return <div>Loading...</div>;
   return (
     <>
       <SEO
@@ -36,9 +38,9 @@ function UserDetails() {
       />
       <UserEditForm user={user} />
       <h3>Recently Applied Jobs</h3>
-      {user.applications.length == 0
-        ? "You haven't apply to any!"
-        : user.applications.map((job) => <div key={job.id}>{job.title}</div>)}
+      {user.applications.map((job) => (
+        <UserJobs key={job} jobId={job} />
+      ))}
     </>
   );
 }
