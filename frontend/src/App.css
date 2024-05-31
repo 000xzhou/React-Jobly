@@ -38,3 +38,7 @@ main {
   margin: auto;
   padding-block: 2rem;
 }
+
+button {
+  cursor: pointer;
+}

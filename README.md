@@ -26,3 +26,7 @@ POST users//:username/jobs
 current users you can use
 testuser password
 testadmin password
+
+### Note
+
+I try to add a button to apply for a job at the company detail page. But it looks ugly so I took it out.

@@ -7,6 +7,10 @@ function JobDetails() {
   const { id } = useParams();
   const [job, loading, error] = useAPI("getJob", id);
 
+  const handleApplyClick = () => {
+    console.log("here");
+  };
+
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error.message}</div>;
 
@@ -18,10 +22,14 @@ function JobDetails() {
       />
 
       <div>
+        <button className="button" onClick={handleApplyClick}>
+          Apply
+        </button>
         <h2>{job.title}</h2>
         <p>Salary: {job.salary}</p>
         <p> Equity: {job.equity > 0 ? "Yes" : "No"}</p>
       </div>
+
       <div>
         <Link key={job.id} to={`/companies/${job.company.handle}`}>
           <h3>Company: {job.company.name}</h3>
