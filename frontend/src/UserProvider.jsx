@@ -21,6 +21,7 @@ export const UserProvider = ({ children }) => {
       setUserInfo(currentUser.username);
     }
   }, [currentUser]);
+
   // get jobs from user - user.jobs
   const [user, loading, error, filter, setFilter, setRefetch] = useAPI(
     "getUser",

@@ -2,20 +2,14 @@ import useAPI from "../../hooks/useAPI";
 import User from "./User";
 import SEO from "../SEO";
 import { useUser } from "../../UserProvider";
-import { useNavigate } from "react-router-dom";
-import { useEffect } from "react";
+import useAccess from "../../hooks/useAccess";
 
 function UserList() {
-  const navigate = useNavigate();
   const { currentUser } = useUser();
 
-  // redirect if not admin
-  useEffect(() => {
-    if (!currentUser.isAdmin) {
-      navigate(`/`);
-    }
-  }, [currentUser, navigate]);
-  if (!currentUser.isAdmin) {
+  const user = useAccess(currentUser, "admin");
+
+  if (!user) {
     return null;
   }
 
@@ -37,6 +31,7 @@ function UserList() {
               <th>First Name</th>
               <th>Last Name</th>
               <th>Admin</th>
+              <th></th>
             </tr>
           </thead>
           <tbody>

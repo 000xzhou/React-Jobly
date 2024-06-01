@@ -5,7 +5,7 @@ import useFormSubmit from "../../hooks/useFormSubmit";
 function JobForm() {
   const { currentUser } = useUser();
 
-  const user = useAccess(currentUser.username, "admin");
+  const user = useAccess(currentUser, "admin");
 
   const initialState = {
     title: "",

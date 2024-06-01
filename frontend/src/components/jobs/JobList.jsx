@@ -17,7 +17,7 @@ function JobList() {
   );
 
   if (loading) return <div>Loading...</div>;
-  if (error) return <div>Error: {error.join(", ")}</div>;
+  if (error) return <div>Error: {error.error}</div>;
 
   return (
     <>

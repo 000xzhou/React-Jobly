@@ -3,19 +3,17 @@ import { Link } from "react-router-dom";
 import useAPI from "../../hooks/useAPI";
 import SEO from "../SEO";
 import { useUser } from "../../UserProvider";
-import useApplyForJob from "../../hooks/useApplyForJob";
+import JobUser from "./jobuser";
 
 function JobDetails() {
   const { id } = useParams();
   const [job, loading, error] = useAPI("getJob", id);
-  const { user } = useUser();
+  const { user, currentUser } = useUser();
 
   const navigate = useNavigate();
   const goBack = () => {
     navigate(-1); // This will go back to the previous page
   };
-
-  const [apply, handleApply] = useApplyForJob(user.username, id);
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error.message}</div>;
@@ -28,15 +26,7 @@ function JobDetails() {
       />
 
       <div>
-        {user.applications.find((jobId) => jobId == id) ? (
-          <button className="button" disabled>
-            Applied
-          </button>
-        ) : (
-          <button className="button" disabled={apply} onClick={handleApply}>
-            {apply ? "Applied" : "Apply"}
-          </button>
-        )}
+        {currentUser && user && <JobUser id={id} />}
 
         <button className="button" onClick={goBack}>
           Go Back

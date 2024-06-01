@@ -5,7 +5,7 @@ import useFormSubmit from "../../hooks/useFormSubmit";
 function CompanyForm() {
   const { currentUser } = useUser();
 
-  const user = useAccess(currentUser.username, "admin");
+  const user = useAccess(currentUser, "admin");
 
   const initialState = {
     handle: "",

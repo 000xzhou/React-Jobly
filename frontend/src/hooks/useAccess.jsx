@@ -18,7 +18,7 @@ const useAccess = (username, accessType) => {
 
     // user and admin only
     if (accessType === "user") {
-      if (username !== currentUser.username && !currentUser.isAdmin) {
+      if (username.username !== currentUser.username && !currentUser.isAdmin) {
         navigate(`/`);
         setHasNavigated(true);
         return;
@@ -31,7 +31,7 @@ const useAccess = (username, accessType) => {
       setHasNavigated(true);
       return;
     }
-  }, [currentUser, username, accessType, navigate, hasNavigated]);
+  }, [currentUser, currentUser, accessType, navigate, hasNavigated]);
 
   return currentUser;
 };

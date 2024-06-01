@@ -5,7 +5,7 @@ import useFormSubmit from "../../hooks/useFormSubmit";
 function UserForm() {
   const { currentUser } = useUser();
 
-  const user = useAccess(currentUser.username, "admin");
+  const user = useAccess(currentUser, "admin");
 
   if (!user) {
     return null;
