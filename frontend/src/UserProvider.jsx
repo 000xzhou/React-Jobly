@@ -26,6 +26,7 @@ export const UserProvider = ({ children }) => {
     "getUser",
     userInfo
   );
+
   // waiting for it to load before returning data
   if (loading) {
     return <div>Loading user data...</div>;

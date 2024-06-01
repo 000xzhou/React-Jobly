@@ -91,10 +91,50 @@ class JoblyApi {
   }
 
   //
-  /** Post Login user */
+  /** Post applying for job */
 
   static async postApplyJobs({ username, jobId }) {
     let res = await this.request(`users/${username}/jobs/${jobId}`, {}, "post");
+    return res;
+  }
+
+  /** Post new company */
+
+  static async postNewCompany({ handle, name, description, numEmployees }) {
+    let res = await this.request(
+      `companies`,
+      { handle, name, description, numEmployees: Number(numEmployees) },
+      "post"
+    );
+    return res;
+  }
+
+  /** Post new company */
+
+  static async postNewJob({ title, salary, equity, companyHandle }) {
+    let res = await this.request(
+      `jobs`,
+      { title, salary: Number(salary), equity, companyHandle },
+      "post"
+    );
+    return res;
+  }
+
+  /** Post new user */
+
+  static async postNewUser({
+    username,
+    password,
+    firstName,
+    lastName,
+    email,
+    isAdmin,
+  }) {
+    let res = await this.request(
+      `users`,
+      { username, password, firstName, lastName, email, isAdmin },
+      "post"
+    );
     return res;
   }
 }

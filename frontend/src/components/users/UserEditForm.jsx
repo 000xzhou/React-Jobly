@@ -12,7 +12,7 @@ const UserEditForm = ({ user }) => {
   const [formData, handleChange, handleSubmit, error] = useFormSubmit(
     initialState,
     "patchUser",
-    true
+    "edit"
   );
 
   const [isEditing, setIsEditing] = useState(false);
