@@ -19,6 +19,7 @@ function NavBar() {
     setCurrentUser(null);
     setToken(null);
     JoblyApi.token = "";
+    toggleDropdown();
     // redirect to home page
     navigate(`/`);
   };

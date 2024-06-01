@@ -79,7 +79,7 @@ function UserForm() {
         checked={formData.isAdmin}
       />
 
-      <button>Add new user</button>
+      <button className="button">Add new user</button>
     </form>
   );
 }

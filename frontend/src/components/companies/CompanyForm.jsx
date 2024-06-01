@@ -56,7 +56,7 @@ function CompanyForm() {
         onChange={handleChange}
       />
 
-      <button>Add new company</button>
+      <button className="button">Add new company</button>
     </form>
   );
 }

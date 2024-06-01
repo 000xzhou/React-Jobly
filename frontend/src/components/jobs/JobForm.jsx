@@ -56,7 +56,7 @@ function JobForm() {
         onChange={handleChange}
       />
 
-      <button>Add new job</button>
+      <button className="button">Add new job</button>
     </form>
   );
 }

@@ -62,7 +62,7 @@ function Register() {
           value={formData.password}
           onChange={handleChange}
         />
-        <button>Register</button>
+        <button className="button">Register</button>
       </form>
     </>
   );

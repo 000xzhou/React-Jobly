@@ -63,10 +63,12 @@ const UserEditForm = ({ user }) => {
                 value={formData.email}
                 onChange={handleChange}
               />
-              <button>Edit</button>
+              <button className="button">Edit</button>
             </form>
           ) : (
-            <button onClick={handleIsEditing}>Edit Profile</button>
+            <button className="button" onClick={handleIsEditing}>
+              Edit Profile
+            </button>
           )}
         </div>
       </div>

@@ -42,3 +42,7 @@ main {
 button {
   cursor: pointer;
 }
+
+form input {
+  display: block;
+}

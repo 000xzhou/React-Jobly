@@ -35,7 +35,7 @@ function Login() {
           value={formData.password}
           onChange={handleChange}
         />
-        <button>Login</button>
+        <button className="button">Login</button>
       </form>
     </>
   );
